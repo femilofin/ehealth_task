@@ -1,0 +1,13 @@
+{
+  "AWSEBDockerrunVersion": "1",
+   "Image": {
+    "Name": "[NAME]ehealth-task:latest",
+    "Update": "true"
+  },
+  "Ports": [
+    {
+      "ContainerPort": "8002"
+    }
+  ],
+  "Logging": "/var/ehealth_log"
+}

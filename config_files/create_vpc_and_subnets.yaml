@@ -1,0 +1,38 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'Creates a VPC for EHealth'
+Resources:
+  EHealth_VPC:
+    Description: 'Creates a VPC for EHealth'
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: 10.130.0.0/16
+      EnableDnsSupport: 'true'
+      EnableDnsHostnames: 'true'
+      InstanceTenancy: dedicated
+      Tags:
+      - Key: Name
+        Value: EHealth_VPC
+
+  Private_Subnet:
+    Description: 'Creates private subnet for auto scaling'
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId:
+        Ref: EHealth_VPC
+      CidrBlock: 10.130.11.0/24
+      AvailabilityZone: "eu-west-1a"
+      Tags:
+      - Key: Name
+        Value: Private_Subnet
+
+  ELB_Subnet:
+    Description: 'Creates public subnet for the elastic load balancer'
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId:
+        Ref: EHealth_VPC
+      CidrBlock: 10.130.1.0/24
+      AvailabilityZone: "eu-west-1a"
+      Tags:
+      - Key: Name
+        Value: ELB_Subnet
