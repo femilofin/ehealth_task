@@ -41,4 +41,4 @@ RUN pip install -r requirements.txt
 CMD ["sh", "./deploy/container_start.sh"]
 
 # Expose listening ports
-EXPOSE  8002
+EXPOSE  8002 80
