@@ -78,10 +78,10 @@ WSGI_APPLICATION = 'ehealth_task.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'ehealth-db',
+        'NAME': 'ehealth',
         'USER': 'ehealth',
-        'PASSWORD': 'password',
-        'HOST': 'mydbinstance.sample.eu-west-1.rds.amazonaws.com',
+        'PASSWORD': 'password1',
+        'HOST': 'ehealth-db.c9tupjuviix6.eu-west-1.rds.amazonaws.com',
         'PORT': '3306'
     }
 }
