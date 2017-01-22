@@ -1,0 +1,18 @@
+version: '2'
+services:
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - .:/var/projects/ehealth
+      - ./deploy/webapp.nginxconf:/etc/nginx/conf.d
+    depends_on:
+      - web
+  web:
+    build: .
+    command: bash -c "python manage.py makemigrations && python manage.py migrate && gunicorn mydjango.wsgi -b 0.0.0.0:8000"
+    volumes:
+      - .:/var/projects/ehealth
+    expose:
+      - "80"

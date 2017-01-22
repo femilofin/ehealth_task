@@ -62,5 +62,14 @@ server {
     }
 }
 
+server {
+    listen 443 ssl;
+    server_name webapp.com;
+
+    location / {
+        root /var/projects/ehealth/
+    }
+}
+
 
 

@@ -28,7 +28,7 @@ RUN mkdir -p /var/log/supervisor
 ADD ./deploy/supervisor_conf.d/webapp.conf /etc/supervisor/conf.d/webapp.conf
 
 
-# copy the contents of this directory over to the container at location /src
+# copy the contents of this directory over to the container at location /var/projects/ehealth
 ADD . /var/projects/ehealth
 
 # set the working directory
