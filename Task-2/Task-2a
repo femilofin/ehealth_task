@@ -1,0 +1,21 @@
+Troubleshooting process
+
+- go to the http site in question,
+    after it redirects to the https equivalent and it times out,
+    observe the message displayed on the browser
+- if message implies that the webpage has a redirect loop or too many redirects
+    - go to the https site directly and ensure that this works
+    - clear the cache and cookies and reload page (to remove the possibility that this is an issue with the browser)
+    - if error persists
+        - go to the config file specifying the security group of the app in .ebextension
+            - ensure that the following is true for the elastic load balancer
+                - Listens on port 80 (HTTP) and proxy it to EC2 instance port 80 (HTTP)
+                - Listens on port 443 (HTTPS) and proxy it to EC2 instance port 80 (HTTP) or port 1433 (HTTP)
+        - go to the nginx config of the app
+            - ensure that nginx is bound to listen on port 80 and 443
+            - ensure that a rule that does the following is added to observe the X_FORWARDED_PROTO value in the header of the load balancer:
+                - ensures that when a request arrives at port 80 on the load balancer, it is forwarded to port 443 as a permanent redirect
+                - ensures that when a request arrives at port 443, the request is served (it is neither forwarded or redirected)
+- else, ensure that the app is breathing by checking the health check. If it rejects the HTTP:80 because of the 301 redirect, change it to HTTP:1433
+- clear the cache and cookies and try again
+

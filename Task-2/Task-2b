@@ -1,0 +1,10 @@
+Troubleshooting process
+
+- clear the cache and the cookies and reload
+- if problem persists,
+    - ensure that the app is running in elastic beanstalk
+    - ensure that the elastic loadbalancer match the settings below:
+         - Listens on port 80 (HTTP) and proxy it to EC2 instance port 80 (HTTP)
+         - Listens on port 443 (HTTPS) and proxy it to EC2 instance port 80 (HTTP)
+    - tail the log file for nginx (e.g tail /var/log/nginx/[sitename]_error.log) to see what's happening in the web server
+    - restart web server (nginx) if need be
